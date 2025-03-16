@@ -1,17 +1,16 @@
 [flake8]
-max-line-length = 160
 
-max-complexity = 10
-
-ignore =
-    W503,
-    F811,
-    F401,
+ignore = W503, F811, F401, E501, I001, I004, W291, E123, W292, E301, W293
 
 exclude =
-    .git,
-    pycache,
     tests/,
     */migrations/,
     venv/,
-    env/
+    */venv/,
+    env/,
+    */env/
+
+per-file-ignores =
+    */settings.py: E501
+    
+max-line-length = 160

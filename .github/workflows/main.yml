@@ -138,6 +138,16 @@ jobs:
           source: "."
           target: "/home/${{ secrets.HOST_USERNAME }}/kittygram"
 
+      - name: Create .env file on remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            echo "${{ secrets.ENV_CONTENT }}" > /home/${{ secrets.HOST_USERNAME }}/kittygram/.env
+
       - name: Execute remote SSH commands to deploy
         uses: appleboy/ssh-action@master
         with:

@@ -126,7 +126,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            mkdir -p /home/${{ secrets.HOST_USER }}/kittygram
+            mkdir -p /home/${{ secrets.HOST_USERNAME }}/kittygram
 
       - name: Copy project files to remote server via SSH
         uses: appleboy/scp-action@master
@@ -136,7 +136,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "."
-          target: "/home/${{ secrets.HOST_USER }}/kittygram"
+          target: "/home/${{ secrets.HOST_USERNAME }}/kittygram"
 
       - name: Execute remote SSH commands to deploy
         uses: appleboy/ssh-action@master
@@ -146,7 +146,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd /home/${{ secrets.HOST_USER }}/kittygram
+            cd /home/${{ secrets.HOST_USERNAME }}/kittygram
             sudo docker compose -f docker-compose.yml pull
             sudo docker compose -f docker-compose.yml down
             sudo docker compose -f docker-compose.yml up -d

@@ -124,6 +124,7 @@ jobs:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "."
           target: "/home/ubuntu/kittygram/"
 
@@ -133,6 +134,7 @@ jobs:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd /home/ubuntu/kittygram/
             sudo docker compose -f docker-compose.yml pull

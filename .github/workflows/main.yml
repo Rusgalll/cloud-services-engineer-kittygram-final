@@ -126,7 +126,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            mkdir -p /home/rusgalll/kittygram
+            mkdir -p /home/${{ secrets.HOST_USER }}/kittygram
 
       - name: Copy project files to remote server via SSH
         uses: appleboy/scp-action@master
@@ -136,7 +136,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "."
-          target: "/home/rusgalll/kittygram/"
+          target: "/home/${{ secrets.HOST_USER }}/kittygram"
 
       - name: Execute remote SSH commands to deploy
         uses: appleboy/ssh-action@master
@@ -146,7 +146,7 @@ jobs:
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd /home/rusgalll/kittygram/
+            cd /home/${{ secrets.HOST_USER }}/kittygram
             sudo docker compose -f docker-compose.yml pull
             sudo docker compose -f docker-compose.yml down
             sudo docker compose -f docker-compose.yml up -d
@@ -184,4 +184,4 @@ jobs:
         with:          
           to: ${{ secrets.TELEGRAM_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}          
-          message: "1000-7"
+          message: "Деплой проекта ${{ github.repository }} выполнен"

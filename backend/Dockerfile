@@ -18,4 +18,4 @@ COPY . ./
 RUN python manage.py collectstatic --noinput
 
 # Запуск сервера
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "kittygram_backend.wsgi:application", "--bind", "0.0.0.0:8000"]
